@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>I love You too</title>
+  <style>
+    body {
+      background-color: #fff3e0;
+      text-align: center;
+      padding-top: 50px;
+    }
+    img {
+      width: 200px;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>I knew it hehe..</h1>
+  <img id="dancingBear" src="bear-dance1.png" alt="Dancing Bear">
+
+  <script>
+    const bear = document.getElementById("dancingBear");
+    let toggle = true;
+    setInterval(() => {
+      bear.src = toggle ? "bear-dance2.png" : "bear-dance1.png";
+      toggle = !toggle;
+    }, 500);
+  </script>
+</body>
+</html>

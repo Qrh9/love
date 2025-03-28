@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Do You Love Me?</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      background-color: #fce4ec;
+      overflow: hidden;
+    }
+    img {
+      width: 200px;
+      height: auto;
+      margin-top: 50px;
+    }
+    h1 {
+      margin: 20px 0;
+    }
+    .buttons {
+      margin-top: 20px;
+      position: relative;
+    }
+    .btn {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 18px;
+      cursor: pointer;
+      border: none;
+      border-radius: 10px;
+      transition: all 0.3s;
+    }
+    #no {
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+  <img id="bearImg" src="cute.png" alt="Bear"> 
+  <h1>Do you love me?</h1>
+  <div class="buttons">
+    <button class="btn" id="yes" onclick="goToDance()">Yes</button>
+    <button class="btn" id="no">No</button>
+  </div>
+
+  <script>
+    function goToDance() {
+      window.location.href = "dance.html";
+    }
+
+    function clamp(value, min, max) {
+      return Math.max(min, Math.min(value, max));
+    }
+
+    function moveNo() {
+      const noBtn = document.getElementById("no");
+      const padding = Math.min(window.innerWidth, window.innerHeight) * 0.05; // 5% of viewport
+      noBtn.style.position = "absolute";
+      
+      // Use viewport units for maximum boundaries
+      const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+      const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+      
+      let currentX = parseFloat(noBtn.style.left) || noBtn.offsetLeft;
+      let currentY = parseFloat(noBtn.style.top) || noBtn.offsetTop;
+      
+      // Make movement relative to screen size
+      let moveDistance = Math.min(window.innerWidth, window.innerHeight) * 0.15; // 15% of viewport
+      let deltaX = (Math.random() * moveDistance) - (moveDistance / 2);
+      let deltaY = (Math.random() * moveDistance) - (moveDistance / 2);
+      
+      let newX = clamp(currentX + deltaX, padding, maxX);
+      let newY = clamp(currentY + deltaY, padding, maxY);
+      
+      noBtn.style.left = newX + 'px';
+      noBtn.style.top = newY + 'px';
+    }
+
+    function clickNo() {
+      const bearImg = document.getElementById("bearImg");
+      bearImg.src = "sad.png";
+      setTimeout(() => {
+        bearImg.src = "cute.png";
+      }, 500);
+      moveNo();
+    }
+
+    document.getElementById("no").addEventListener("mouseover", moveNo);
+    document.getElementById("no").addEventListener("click", clickNo);
+  </script>
+</body>
+</html>
